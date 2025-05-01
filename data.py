@@ -2,6 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 from urllib.parse import urljoin
+import os
 
 
 def get_page_data(url, writer):
@@ -34,10 +35,15 @@ def get_page_data(url, writer):
 
 
 def scrape_all_pages(start_url, csv_filename):
-    with open(csv_filename, 'w', newline='', encoding='utf-8') as file:
+    # Check if the file exists to avoid overwriting, and if it exists, open it in read mode
+    file_exists = os.path.isfile(csv_filename)
+
+    with open(csv_filename, 'a', newline='', encoding='utf-8') as file:
         writer = csv.writer(file)
-        # Write the header row
-        writer.writerow(['Thread Title'])  # Column header for the thread titles
+
+        # If file doesn't exist, write the header
+        if not file_exists:
+            writer.writerow(['Thread Title'])
 
         url = start_url
         while url:
@@ -47,7 +53,7 @@ def scrape_all_pages(start_url, csv_filename):
 
 
 # Starting URL (the first page of the plugin support page)
-start_url = 'https://wordpress.org/support/plugin/plugin-slug/'
+start_url = 'https://wordpress.org/support/plugin/akismet/page/29/'
 csv_filename = 'plugin_support_data.csv'
 
 scrape_all_pages(start_url, csv_filename)
