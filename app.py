@@ -3,20 +3,23 @@ import pandas as pd
 import plotly.express as px
 
 # Load CSV file
-df = pd.read_csv("tutor_plugin_support_data.csv")
+df = pd.read_csv("plugin_support_data.csv")
 df["Thread Title"] = df["Thread Title"].fillna("").astype(str)
 
 # Define categories
 categories = {
-    "Course Issues": ["course", "lesson", "content", "add course"],
-    "Checkout Problems": ["checkout", "payment", "cart", "pay"],
-    "Login/User Access": ["login", "register", "access", "account"],
-    "Quiz/Assignment Issues": ["quiz", "question", "assignment", "grade"],
-    "Error/Bug Reports": ["error", "bug", "problem", "crash", "not working"],
-    "Plugin Related": ["plugin", "wordpress", "shortcode", "theme compatibility"],
-    "Video/Audio Issues": ["video", "audio", "playback", "streaming"],
-    "Mobile/Tablet Support": ["mobile", "tablet", "ios", "android"],
-    "Others": []
+    "Akismet Issues": ["akismet", "spam", "comment", "registration", "captcha", "contact form", "redirect", "block", "error", "fatal", "api", "false positive", "recheck", "bypass", "plugin"],
+    "PHP/Version Compatibility": ["php", "version", "fatal error", "upgrade", "compatibility", "mysql"],
+    "Plugin Compatibility": ["plugin", "theme", "wordpress", "conflict", "contact form", "woocommerce", "gravity form", "piotnet forms"],
+    "Spam Detection & Filtering": ["spam", "comments", "queue", "misdiagnosis", "filter", "false positive", "block", "learnpress", "site", "queue"],
+    "User Access & Registration": ["user", "registration", "login", "access", "email", "password", "account"],
+    "Error Handling & Debugging": ["error", "debug", "warning", "problem", "issue", "fatal", "exception", "bug", "crash", "missing", "not working"],
+    "API & Server Issues": ["api", "server", "offline", "connection", "request", "error code", "response", "status"],
+    "Performance & Speed": ["performance", "load", "speed", "response time", "optimization"],
+    "Translation & Localization": ["translation", "text domain", "language", "locale", "localization"],
+    "Feature Requests & Suggestions": ["feature", "suggestion", "improvement", "request", "change", "enhancement"],
+    "Security & Protection": ["security", "protection", "xml-rpc", "honeypot", "bypass", "validation", "vulnerability"],
+    "Others": []  # To capture everything that doesn't fit into the above categories
 }
 
 # Classify threads
@@ -38,27 +41,30 @@ category_counts = df["Issue Category"].value_counts().reindex(category_order, fi
 
 # Color mapping
 category_colors = {
-    "Course Issues": "#1f77b4",
-    "Checkout Problems": "#2ca02c",
-    "Login/User Access": "#17becf",
-    "Quiz/Assignment Issues": "#ff7f0e",
-    "Error/Bug Reports": "#d62728",
-    "Plugin Related": "#8c564b",
-    "Video/Audio Issues": "#e377c2",
-    "Mobile/Tablet Support": "#7f7f7f",
-    "Others": "#777777"
+    "Akismet Issues": "#FF5733",
+    "PHP/Version Compatibility": "#33FF57",
+    "Plugin Compatibility": "#3357FF",
+    "Spam Detection & Filtering": "#FF33A1",
+    "User Access & Registration": "#A133FF",
+    "Error Handling & Debugging": "#33FFF7",
+    "API & Server Issues": "#F7FF33",
+    "Performance & Speed": "#FF8C33",
+    "Translation & Localization": "#8C33FF",
+    "Feature Requests & Suggestions": "#33FF91",
+    "Security & Protection": "#FF3333",
+    "Others": "#57FF33"
 }
 
 # Bar chart
 bar_fig = px.bar(
     x=category_counts.index,
     y=category_counts.values,
-    labels={"x": "Issue Category", "y": "Number of Threads"},
+    labels={"y": "Issue Category", "x": "Number of Threads"},
     title="Issue Categorization",
     color=category_counts.index,
     color_discrete_map=category_colors
 )
-bar_fig.update_layout(xaxis_tickangle=-45, template="plotly_dark")
+bar_fig.update_layout(xaxis_tickangle=-30, template="plotly_dark")
 
 # Pie chart
 pie_fig = px.pie(
@@ -71,8 +77,8 @@ pie_fig = px.pie(
 pie_fig.update_layout(template="plotly_dark")
 
 # Streamlit app layout
-st.set_page_config(page_title="Issue Dashboard for Tutor LMS", layout="wide")
-st.title("Issue Dashboard for Tutor LMS")
+st.set_page_config(page_title="WP Plugin Issues Tracker", layout="wide")
+st.title("WP Plugin Issues Tracker")
 
 # Initialize session state for pagination
 if "page" not in st.session_state:
@@ -125,4 +131,4 @@ with col3:
             st.session_state.page += 1
 
 if __name__ == "__main__":
-    st.write("Issue Dashboard for Tutor LMS")
+    st.write("WP Plugin Issues Tracker")
