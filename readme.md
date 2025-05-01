@@ -2,6 +2,8 @@
 
 This project allows you to scrape data from the WordPress support forum for specific plugins, categorize the issues, and visualize the categorized data in an interactive web interface using Streamlit and Plotly.
 
+Live Demo: https://wppluginissuetracker.streamlit.app/
+
 ## Requirements
 
 - Python 3.x
