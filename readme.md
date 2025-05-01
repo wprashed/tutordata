@@ -1,4 +1,4 @@
-# Tutor LMS Issue Dashboard
+# WP PLugin Issue Tracker
 
 This project includes two components:
 1. A **Streamlit dashboard** for visualizing and categorizing support issues.
