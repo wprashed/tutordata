@@ -46,8 +46,8 @@ def scrape_all_pages(start_url, csv_filename):
                 break  # If no next page is found, stop scraping
 
 
-# Starting URL (the first page of the Tutor plugin support page)
-start_url = 'https://wordpress.org/support/plugin/tutor/'
+# Starting URL (the first page of the plugin support page)
+start_url = 'https://wordpress.org/support/plugin/plugin-slug/'
 csv_filename = 'tutor_plugin_support_data.csv'
 
 scrape_all_pages(start_url, csv_filename)
