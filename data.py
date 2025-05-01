@@ -48,6 +48,6 @@ def scrape_all_pages(start_url, csv_filename):
 
 # Starting URL (the first page of the plugin support page)
 start_url = 'https://wordpress.org/support/plugin/plugin-slug/'
-csv_filename = 'tutor_plugin_support_data.csv'
+csv_filename = 'plugin_support_data.csv'
 
 scrape_all_pages(start_url, csv_filename)
